@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     email = models.EmailField(max_length=255, verbose_name="email", unique=True)
     username = models.CharField(max_length=64, verbose_name="username", unique=True)
     registered_dttm = models.DateTimeField(auto_now_add=True, verbose_name='registered_date')
@@ -57,3 +57,4 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
