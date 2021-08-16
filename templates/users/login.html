@@ -1,0 +1,85 @@
+{% extends "users/base.html" %}
+{% block content %}
+    <div>
+        <main class="container px-5 mx-auto lg:px-0 md:w-full flex flex-col py-8 items-center justify-center min-h-screen w-full">
+            <section class="max-w-md w-full rounded-2xl md:py-6 md:px-5 lg:py-12 lg:px-10 md:border">
+                <header class="text-gray-6 dark:text-gray-1">
+                    <div class="flex items-center justify-between">
+                        <h1>
+                            <imag></imag>
+                        </h1>
+                        <button class="outline-none focus:outline-none"></button>
+                    </div>
+                    <h3 class="text-lg font-semibold leading-tight mt-4 md:mt-8">Login</h3>
+                </header>
+                <div class="my-8">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <label class="input-label-icon">
+                                <span></span>
+                                <input type="email" placeholder="email" name="email" id="id_email">
+                            </label>
+                            {% if field.errors %}
+                                <small class="text-red-400">{{ error }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label-icon">
+                                <span></span>
+                                <input type="password" placeholder="password" name="password" id="id_password">
+                            </label>
+                            {% if field.errors %}
+                                <small class="text-red-400">{{ error }}</small>
+                            {% endif %}
+                            <button type="submit" class="btn-submit w-full">
+                                <span>Login</span>
+                            </button>
+                    </form>
+                </div>
+                <footer class="flex flex-col items-center justify-center">
+                    <span class="text-sm text-gray-3">or continue with these social profile</span>
+                    <div class="mt-5">
+                        <ul class="flex items-center mb-3">
+                            <li class="mr-5">
+                                <button class="outline-none focus:outline-none">
+                                    <img>
+                                </button>
+                            </li>
+                            <li class="mr-5">
+                                <button class="outline-none focus:outline-none">
+                                    <img>
+                                </button>
+                            </li>
+                            <li class="mr-5">
+                                <button class="outline-none focus:outline-none">
+                                    <img>
+                                </button>
+                            </li>
+                            <li class="mr-5">
+                                <button class="outline-none focus:outline-none">
+                                    <img>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="text-sm text-gray-3">Don;t have an account yet ?</span>
+                    <a class="text-blue-1" onclick="location.href='../register'">Register</a>
+                </footer>
+            </section>
+            <div class="max-w-md w-full">
+                <footer class="mt-6 flex items-center justify-between w-full">
+                <span class="text-sm text-gray-3">
+                    "by"
+                    <a class="hover:text-blue-1">@ttony0321</a>
+                </span>
+                    <span class="text-sm text-gray-3">
+                    <a class="hover:text-gray-4">
+                        Authentication
+                    </a>
+                </span>
+                </footer>
+            </div>
+        </main>
+    </div>
+{% endblock %}

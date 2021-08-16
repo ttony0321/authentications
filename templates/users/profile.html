@@ -1,0 +1,102 @@
+{% extends "users/base.html" %}
+{% block content %}
+    <div>
+        <main class="container text-sm md:text-base px-4 lg:px-0 mx-auto h-screen flex flex-col items-center w-full">
+            <header class="w-full py-2">
+                <div class="flex w-full items-center justify-between">
+                    <img>
+                    <div class="flex items-center">
+                        <div class="mr-6 flex items-center">
+                            <button class="outline-none focus:outline-none">darkmode</button>
+                        </div>
+                        <div class="relative cursor-pointer text-gray-6 dark:text-gray-5 transition">
+                            <div class="flex items-center">
+                                <div class="md:mr-2">
+                                    <span></span>
+                                </div>
+                                <div class="hidden md:flex items-center">
+                                    <span class="text-sm capitalize font-semibold">{{ user.username }}</span>
+                                    <span class="ml-2 block transition transform ">
+                            icon
+                            </span>
+                                </div>
+                            </div>
+                            <nav class="absolute right-0 w-48 mt-3 shadow-in-dark bg-white dark:bg-gray-dark dark:text-gray-3 transition flex border rounded-lg p-3 dark:border-gray-6 outline-gray-5 hidden opacity-0">
+                                <ul class="flex w-full flex-col text-xs">
+                                    <li>
+                                        <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent">
+                                            <span class="mr-2"></span>
+                                            <span class="capitalize">My Profile</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent">
+                                            <span class="mr-2"></span>
+                                            <span class="capitalize">Group Chat</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex rounded-lg p-2 items-center transition text-red-400 hover:text-red-500 hover:bg-red-100 dark:hover:bg-transparent">
+                                        <span class="mr-2"></span>
+                                        <span class="capitalize">Logout</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="md:w-10/12 lg:w-8/12 py-8 w-full flex flex-col items-center">
+                <div class="pb-8 mt-4 flex flex-col items-center">
+                    <h2 class="text-2xl md:text-4xl text-gray-6 dark:text-white">Profile Info</h2>
+                    <h4 class="text-gray-3 text-sm md:text-base mt-2 dark:text-gray-1">Basic info</h4>
+                </div>
+                <section class="w-full md:border rounded-lg">
+                    <header class="entry-info">
+                        <div>
+                            <h2 class="text-xl text-gray-6 dark:text-white">Profile</h2>
+                            <span class="text-gray-3 mt-2 leading-tight block text-sm dark:text-gray-5">Some info maybe visible to other people.</span>
+                        </div>
+                        <button class="outline-none rounded-lg text-gray-3 ml-2 text-sm dark:text-gray-5 focus:outline-none border text-center px-6 py-2" type="button" onclick="location.href={% url 'users:edit-profiles'%}"></button>
+                    </header>
+                    <div class="entry-info">
+                        <div class="entry-label">photo</div>
+                        <div class="entry-value">
+
+                            <img src="{{ profile.imageURL }}" class="w-3/12 text-xs h-auto object-cover">
+
+                        </div>
+                    </div>
+                    <div class="entry-info">
+                        <div class="entry-label">Name</div>
+                        <div class="entry-value">{{ profile.username }}</div>
+                    </div>
+                    <div class="entry-info">
+                        <div class="entry-label">BIO</div>
+                        <div class="entry-value">{{ profile.bio }}</div>
+                    </div>
+                    <div class="entry-info">
+                        <div class="entry-label">PHONE</div>
+                        <div class="entry-value">{{ profile.phone }}</div>
+                    </div>
+                    <div class="entry-info">
+                        <div class="entry-label">EMAIL</div>
+                        <div class="entry-value">{{ profile.email }}</div>
+                    </div>
+                    <div class="entry-info">
+                        <div class="entry-label">Created</div>
+                        <div class="entry-value">{{ profile.created }}</div>
+                    </div>
+                </section>
+                <footer class="mt-6 flex items-center justify-between w-full">
+                <span class="text-sm text-gray-3">
+                    "by"
+                    <a class="hover:text-blue-1">@ttony0321</a>
+                </span>
+                    <span class="text-sm text-gray-3">
+                    <a class="hover:text-gray-4">Authentication</a>
+                </span>
+                </footer>
+            </div>
+        </main>
+    </div>
+{% endblock %}
