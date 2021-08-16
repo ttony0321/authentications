@@ -16,7 +16,7 @@
                 <div class="my-8">
                     <form method="post" action=".">
                         {% csrf_token %}
-                        {% for field in form %}
+                        {% for field in user_form %}
                             <div class="input-group">
                                 <label class="input-label-icon">
                                     <span></span>
