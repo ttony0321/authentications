@@ -56,35 +56,35 @@
                             <h2 class="text-xl text-gray-6 dark:text-white">Profile</h2>
                             <span class="text-gray-3 mt-2 leading-tight block text-sm dark:text-gray-5">Some info maybe visible to other people.</span>
                         </div>
-                        <button class="outline-none rounded-lg text-gray-3 ml-2 text-sm dark:text-gray-5 focus:outline-none border text-center px-6 py-2" type="button" onclick="location.href={% url 'users:edit-profiles'%}"></button>
+                        <button class="outline-none rounded-lg text-gray-3 ml-2 text-sm dark:text-gray-5 focus:outline-none border text-center px-6 py-2" type="button">edit</button>
                     </header>
                     <div class="entry-info">
                         <div class="entry-label">photo</div>
                         <div class="entry-value">
 
-                            <img src="{{ profile.imageURL }}" class="w-3/12 text-xs h-auto object-cover">
+                            <img src="{{ user.imageURL }}" class="w-3/12 text-xs h-auto object-cover">
 
                         </div>
                     </div>
                     <div class="entry-info">
                         <div class="entry-label">Name</div>
-                        <div class="entry-value">{{ profile.username }}</div>
+                        <div class="entry-value">{{ user.username }}</div>
                     </div>
                     <div class="entry-info">
                         <div class="entry-label">BIO</div>
-                        <div class="entry-value">{{ profile.bio }}</div>
+                        <div class="entry-value">{{ user.bio }}</div>
                     </div>
                     <div class="entry-info">
                         <div class="entry-label">PHONE</div>
-                        <div class="entry-value">{{ profile.phone }}</div>
+                        <div class="entry-value">{{ user.phone }}</div>
                     </div>
                     <div class="entry-info">
                         <div class="entry-label">EMAIL</div>
-                        <div class="entry-value">{{ profile.email }}</div>
+                        <div class="entry-value">{{ user.email }}</div>
                     </div>
                     <div class="entry-info">
                         <div class="entry-label">Created</div>
-                        <div class="entry-value">{{ profile.created }}</div>
+                        <div class="entry-value">{{ user.registered_dttm }}</div>
                     </div>
                 </section>
                 <footer class="mt-6 flex items-center justify-between w-full">

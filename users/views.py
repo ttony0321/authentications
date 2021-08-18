@@ -1,35 +1,50 @@
 from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.contrib.auth import authenticate, login
+from .forms import RegisterForm
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.views.generic import FormView
-from .forms import RegisterForm, LoginForm
+
 # Create your views here.
 
 
+def index(request):
+    return render(request, 'users/index.html')
+
+
 def register(request):
-    if request.method == 'POST':        #POST 면 전달받은 FORM의 유효성을 검사하고 db저장
-        user_form = RegisterForm(request.POST)
-        if user_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user_form.cleaned_data['password'])
-            user.save()
-            return render(request, 'users/login.html', {'user': user})
-
-    elif request.method == 'GET':       #get이면 그냥 FORM을 띄워준다.
-        user_form = RegisterForm()
-        return render(request, 'users/register.html', {'user_form': user_form})
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            user = User.objects.create_user(
+                email=request.POST['email'], username=request.POST['username'], password=request.POST['password1']
+            )
+            auth.login(request, user)
+            return redirect('/users/index/')
+        return render(request, 'users/register.html')
+    return render(request, 'users/register.html')
 
 
-class LoginView(FormView):
-    template_name = 'users/login.html'
-    form_class = LoginForm
-    success_url = '/'
-
-    def form_valid(self, form):
-        self.request.session['user'] = form.data.get('email')
-        return super().form_valid(form)
+def loginuser(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = auth.authenticate(request, email=email, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'users/login.html', {'error' : 'username or password is incorrect.'})
+    else:
+        return render(request, 'users/login.html')
 
 
 def logout(request):
-    if request.session.get('user'):
-        del(request.session['user'])
-    return redirect('/')
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect('/')
 
+
+def profile(request):
+    user = request.user
+    return render(request, 'users/profile.html', {'user': user})
