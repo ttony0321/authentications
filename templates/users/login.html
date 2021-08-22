@@ -1,4 +1,7 @@
 {% extends "users/base.html" %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% block content %}
     <div>
         <main class="container px-5 mx-auto lg:px-0 md:w-full flex flex-col py-8 items-center justify-center min-h-screen w-full">
@@ -8,7 +11,7 @@
                         <h1>
                             <imag></imag>
                         </h1>
-                        <button class="outline-none focus:outline-none"></button>
+                        <button class="outline-none focus:outline-none"><img src="{% static 'img/dark_mode_black_24dp.svg' %}"> </button>
                     </div>
                     <h3 class="text-lg font-semibold leading-tight mt-4 md:mt-8">Login</h3>
                 </header>
@@ -42,23 +45,23 @@
                     <div class="mt-5">
                         <ul class="flex items-center mb-3">
                             <li class="mr-5">
-                                <button class="outline-none focus:outline-none">
-                                    <img>
+                                <button class="outline-none focus:outline-none" onclick="location.href='{% provider_login_url 'google' %}'">
+                                    <img src="{% static 'img/Google.svg' %}">
                                 </button>
                             </li>
                             <li class="mr-5">
-                                <button class="outline-none focus:outline-none">
-                                    <img>
+                                <button class="outline-none focus:outline-none" onclick="location.href='{% provider_login_url 'naver' %}'">
+                                    <img src="{% static 'img/Facebook.svg' %}">
                                 </button>
                             </li>
                             <li class="mr-5">
-                                <button class="outline-none focus:outline-none">
-                                    <img>
+                                <button class="outline-none focus:outline-none" onclick="location.href='{% provider_login_url 'kakao' %}'">
+                                    <img src="{% static 'img/Twitter.svg' %}">
                                 </button>
                             </li>
                             <li class="mr-5">
-                                <button class="outline-none focus:outline-none">
-                                    <img>
+                                <button class="outline-none focus:outline-none" onclick="location.href='{% provider_login_url 'github' %}'">
+                                    <img src="{% static 'img/Github.svg' %}">
                                 </button>
                             </li>
                         </ul>
@@ -70,11 +73,11 @@
             <div class="max-w-md w-full">
                 <footer class="mt-6 flex items-center justify-between w-full">
                 <span class="text-sm text-gray-3">
-                    "by"
+                    by
                     <a class="hover:text-blue-1">@ttony0321</a>
                 </span>
                     <span class="text-sm text-gray-3">
-                    <a class="hover:text-gray-4">
+                    <a class="hover:text-blue-1">
                         Authentication
                     </a>
                 </span>

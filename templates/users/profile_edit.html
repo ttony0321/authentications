@@ -1,55 +1,57 @@
 {% extends "users/base.html" %}
+{% load static %}
 {% block content %}
     <div>
         <div>
             <main class="container text-sm md:text-base px-4 lg:px-0 mx-auto h-screen flex flex-col items-center w-full">
                 <header class="w-full py-2">
-                <div class="flex w-full items-center justify-between">
-                    <img>
-                    <div class="flex items-center">
-                        <div class="mr-6 flex items-center">
-                            <button class="outline-none focus:outline-none">darkmode</button>
-                        </div>
-                        <div class="relative cursor-pointer text-gray-6 dark:text-gray-5 transition">
-                            <div class="flex items-center">
-                                <div class="md:mr-2">
-                                    <span></span>
-                                </div>
-                                <div class="hidden md:flex items-center">
-                                    <span class="text-sm capitalize font-semibold">nickname</span>
-                                    <span class="ml-2 block transition transform ">
-                            icon
-                            </span>
-                                </div>
+                    <div class="flex w-full items-center justify-between">
+                        <img class="cursor-pointer" src="{% static 'img/fingerprint_black_24dp.svg' %}" onclick="location.href='{% url 'users:profile' %}'">
+                        <div class="flex items-center">
+                            <div class="mr-6 flex items-center">
+                                <button class="outline-none focus:outline-none"><img src="{% static 'img/dark_mode_black_24dp.svg' %}"></button>
                             </div>
-                            <nav class="absolute right-0 w-48 mt-3 shadow-in-dark bg-white dark:bg-gray-dark dark:text-gray-3 transition flex border rounded-lg p-3 dark:border-gray-6 outline-gray-5 hidden opacity-0">
-                                <ul class="flex w-full flex-col text-xs">
-                                    <li>
-                                        <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent">
-                                            <span class="mr-2"></span>
-                                            <span class="capitalize">My Profile</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent">
-                                            <span class="mr-2"></span>
-                                            <span class="capitalize">Group Chat</span>
-                                        </div>
-                                    </li>
-                                    <li class="flex rounded-lg p-2 items-center transition text-red-400 hover:text-red-500 hover:bg-red-100 dark:hover:bg-transparent">
-                                        <span class="mr-2"></span>
-                                        <span class="capitalize">Logout</span>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <div class="relative cursor-pointer text-gray-6 dark:text-gray-5 transition dropdown" onclick="MakeNav()">
+                                <div class="flex items-center">
+                                    <div class="md:mr-2">
+                                        <span><img src="{% static 'img/menu_black_24dp.svg' %}"></span>
+                                    </div>
+                                    <div class="hidden md:flex items-center">
+
+                                        <span class="text-sm capitalize font-semibold"></span>
+                                        <span class="ml-2 block transition transform ">
+                            </span>
+                                    </div>
+                                </div>
+                                <nav class="absolute right-0 w-48 mt-3 shadow-in-dark bg-white dark:bg-gray-dark dark:text-gray-3 transition flex border rounded-lg p-3 dark:border-gray-6 outline-gray-5 hidden opacity-0">
+                                    <ul class="flex w-full flex-col text-xs">
+                                        <li>
+                                            <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent" onclick="location.href='{% url 'users:profile' %}'">
+                                                <span class="mr-2"><img src="{% static 'img/account_circle_black_24dp.svg' %}"></span>
+                                                <span class="capitalize">My Profile</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="flex rounded-lg p-2 items-center transition dark:hover:text-gray-5 hover:bg-gray-2 dark:hover:bg-transparent group-chat" onclick="GroupChat()">
+                                                <span class="mr-2"><img src="{% static 'img/groups_black_24dp.svg' %}"></span>
+                                                <span class="capitalize">Group Chat</span>
+                                            </div>
+                                        </li>
+                                        <li class="flex rounded-lg p-2 items-center transition text-red-400 hover:text-red-500 hover:bg-red-100 dark:hover:bg-transparent" onclick="location.href='{% url 'users:logout' %}'">
+                                            <span class="mr-2"><img src="{% static 'img/logout_black_24dp.svg' %}"></span>
+                                            <span class="capitalize">Logout</span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
                 <div class="md:w-10/12 lg:w-8/12 py-8 w-full flex flex-col items-center">
                     <div class="md:mb-4 flex w-full">
-                        <div class="text-blue-1 flex items-center cursor-pointer" onclick="location.href='{% url 'users:profiles' %}'">
-                            <svg></svg>
+                        <div class="text-gray-dark flex items-center cursor-pointer"
+                             onclick="location.href='{% url 'users:profile' %}'">
+                            <img src="{% static 'img/chevron_left_black_24dp.svg' %}">
                             <span>Back</span>
                         </div>
                     </div>
@@ -60,26 +62,18 @@
                                 <span class="text-gray-3 mt-2 leading-tight block text-sm dark:text-gray-5">Some info maybe visible to other people.</span>
                             </div>
                         </header>
-                        <form class="text-gray-6 md:w-8/12 dark:text-gray-5" method="post">
+                        <form class="text-gray-6 md:w-8/12 dark:text-gray-5" method="post"
+                              enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <div class="flex flex-row items-center">
-                                    <label class="relative w-16 h-16 transition bg-gray-3 flex items-center justify-center text-gray-5 hover:text-white cursor-pointer rounded overflow-hidden">
-                                        <img>
-                                        <div class="bg-gray-dark bg-opacity-50 flex items-center justify-center h-full w-full absolute inset-0">
-                                            <svg></svg>
-                                            <input type="file" name="imageFile" class="sr-only">
-                                        </div>
-                                    </label>
-                                    <span class="ml-6 uppercase text-gray-6 text-sm dark:text-gray-5"> CHANGE PHOTO</span>
-                                </div>
-                                <small class="text-red-400 mt-1"></small>
-                                <div></div>
-                            </div>
                             {% for field in form %}
                                 <div class="form-group">
+                                {% if field.label == 'PhoneNumber' %}
+                                    <label class="mb-1">{{ field.label }}  <span class="text-red-400 mt-1">ex)+12345678910</span></label>
+                                    {% else %}
                                     <label class="mb-1">{{ field.label }}</label>
+                                    {% endif %}
                                     {{ field }}
+                                    <small class="text-red-400 mt-1">{{ error }}</small>
                                 </div>
                             {% endfor %}
 
@@ -92,11 +86,11 @@
                     </section>
                     <footer class="mt-6 flex items-center justify-between w-full">
                 <span class="text-sm text-gray-3">
-                    "by"
+                    by
                     <a class="hover:text-blue-1">@ttony0321</a>
                 </span>
                         <span class="text-sm text-gray-3">
-                    <a class="hover:text-gray-4">test</a>
+                    <a class="hover:text-blue-1">test</a>
                 </span>
                     </footer>
                 </div>
